@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public GameObject _floor;
-    public GameObject[] _deathWall;
+    public GameObject _deathWall;
     public int _totalTime = 210;// 180 120 60 縮圈
     public int _currentTime = 210;
 
@@ -18,35 +17,24 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (_currentTime <= 180 && _currentTime >= 150) //一階段縮圈 scale(10,10) -> scale(7.5,7.5)  
+        if (_currentTime <= 180 && _currentTime >= 150) //一階段縮圈 scale(7000,7000) -> scale(5750,5750)  
         {
             float delta = (_currentTime - 150) / 30f;
-            _floor.transform.localScale = new Vector3(7.5f + delta * 2.5f, 1f, 7.5f + delta * 2.5f);
+            _deathWall.transform.localScale = new Vector3(5750f + delta * 1250f, 3500f, 5750f + delta * 1250f);
 
-            _deathWall[0].transform.localPosition = new Vector3(0f, 50f, -38f + delta * -12.5f);
-            _deathWall[1].transform.localPosition = new Vector3(0f, 50f, 38f + delta * 12.5f);
-            _deathWall[2].transform.localPosition = new Vector3(38f + delta * 12.5f, 50f, 0f);
-            _deathWall[3].transform.localPosition = new Vector3(-38f + delta * -12.5f, 50f, 0f);
+
         }
-        else if (_currentTime <= 120 && _currentTime >= 90)//二階段縮圈 scale(7.5,7.5) -> scale(5,5)
+        else if (_currentTime <= 120 && _currentTime >= 90)//二階段縮圈 scale(5750,5750) -> scale(4500,4500)
         {
             float delta = (_currentTime - 90) / 30f;
-            _floor.transform.localScale = new Vector3(5f + delta * 2.5f, 1f, 5f + delta * 2.5f);
+            _deathWall.transform.localScale = new Vector3(4500f + delta * 1250f, 3500f, 4500f + delta * 1250f);
 
-            _deathWall[0].transform.localPosition = new Vector3(0f, 50f, -25.5f + delta * -12.5f);
-            _deathWall[1].transform.localPosition = new Vector3(0f, 50f, 25.5f + delta * 12.5f);
-            _deathWall[2].transform.localPosition = new Vector3(25.5f + delta * 12.5f, 50f, 0f);
-            _deathWall[3].transform.localPosition = new Vector3(-25.5f + delta * -12.5f, 50f, 0f);
         }
-        else if (_currentTime <= 60 && _currentTime >= 30)//三階段縮圈 scale(5,5) -> scale(3,3)
+        else if (_currentTime <= 60 && _currentTime >= 30)//三階段縮圈 scale(4500,4500) -> scale(3500,3500)
         {
             float delta = (_currentTime - 30) / 30f;
-            _floor.transform.localScale = new Vector3(3f + delta * 2f, 1f, 3f + delta * 2f);
+            _deathWall.transform.localScale = new Vector3(3500f + delta * 1000f, 3500f, 3500f + delta * 1000f);
 
-            _deathWall[0].transform.localPosition = new Vector3(0f, 50f, -15.5f + delta * -10f);
-            _deathWall[1].transform.localPosition = new Vector3(0f, 50f, 15.5f + delta * 10f);
-            _deathWall[2].transform.localPosition = new Vector3(15.5f + delta * 10f, 50f, 0f);
-            _deathWall[3].transform.localPosition = new Vector3(-15.5f + delta * -10f, 50f, 0f);
         }
         else if (_currentTime == 0)//結算面板
         {
