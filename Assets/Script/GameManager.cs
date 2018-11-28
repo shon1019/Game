@@ -17,23 +17,23 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (_currentTime <= 180 && _currentTime >= 150) //一階段縮圈 scale(7000,7000) -> scale(5750,5750)  
+        if (_currentTime <= 180 && _currentTime >= 150) //一階段縮圈 scale(10000,10000) -> scale(8000,8000)  
         {
             float delta = (_currentTime - 150) / 30f;
-            _deathWall.transform.localScale = new Vector3(5750f + delta * 1250f, 3500f, 5750f + delta * 1250f);
+            _deathWall.transform.localScale = new Vector3(8000f + delta * 2000f, 3500f, 8000f + delta * 2000f);
 
 
         }
-        else if (_currentTime <= 120 && _currentTime >= 90)//二階段縮圈 scale(5750,5750) -> scale(4500,4500)
+        else if (_currentTime <= 120 && _currentTime >= 90)//二階段縮圈 scale(8000,8000) -> scale(6000,6000)
         {
             float delta = (_currentTime - 90) / 30f;
-            _deathWall.transform.localScale = new Vector3(4500f + delta * 1250f, 3500f, 4500f + delta * 1250f);
+            _deathWall.transform.localScale = new Vector3(6000f + delta * 2000f, 3500f, 6000f + delta * 2000f);
 
         }
-        else if (_currentTime <= 60 && _currentTime >= 30)//三階段縮圈 scale(4500,4500) -> scale(3500,3500)
+        else if (_currentTime <= 60 && _currentTime >= 30)//三階段縮圈 scale(6000,6000) -> scale(4000,4000)
         {
             float delta = (_currentTime - 30) / 30f;
-            _deathWall.transform.localScale = new Vector3(3500f + delta * 1000f, 3500f, 3500f + delta * 1000f);
+            _deathWall.transform.localScale = new Vector3(4000f + delta * 2000f, 3500f, 4000f + delta * 2000f);
 
         }
         else if (_currentTime == 0)//結算面板

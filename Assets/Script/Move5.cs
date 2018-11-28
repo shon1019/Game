@@ -39,7 +39,7 @@ public class Move5 : MonoBehaviour
     void FixedUpdate()
     {
         RaycastHit hit;//判斷離地
-        if(Physics.Raycast(transform.position, new Vector3(0,-1,0), out hit, 2))
+        if(Physics.Raycast(transform.position, new Vector3(0,-4,0), out hit, 2))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
