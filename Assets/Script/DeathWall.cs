@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeathWall : MonoBehaviour {
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player") {
             Destroy(other.gameObject);

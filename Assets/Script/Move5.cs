@@ -21,7 +21,8 @@ public class Move5 : MonoBehaviour
     private bool _cansprint = true;
     private bool _isPowering = false;//是否集氣中(集氣中不能控制)
     private bool _sprinting = false;//是否衝刺CD
-    private bool _speedDown = true;//是否正在限速
+    private bool _sprintspeedDown = true;//是否正在限速
+    private bool _collisionspeedDown = true;//是否正在限速
     private bool _collision = false;//是否被撞飛(被撞到不能控制)
     private bool _flying = false;//是否離地(離地不能控制)
 
@@ -40,7 +41,7 @@ public class Move5 : MonoBehaviour
     void FixedUpdate()
     {
         RaycastHit hit;//判斷離地
-        if(Physics.Raycast(transform.position, new Vector3(0,-1,0), out hit, 2))
+        if (Physics.Raycast(transform.position - new Vector3(0, 0.1f, 0), -new Vector3(0, 1, 0), out hit, 1f))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
@@ -51,7 +52,12 @@ public class Move5 : MonoBehaviour
                 _flying = true;
             }
         }
-        
+        else
+        {
+            _flying = true;
+        }
+
+
         Vector3 dir = Camera.position - this.transform.position;
         dir.y = 0;
         dir = dir.normalized;
@@ -62,19 +68,19 @@ public class Move5 : MonoBehaviour
             if (rigidbody.velocity.magnitude < StopThreshold)//集氣
             {
                 PlayerPower.Add(PowerUpSpeed * Time.deltaTime);
-                _isPowering = true;   
+                _isPowering = true;
             }
-            else if (_sprinting && PlayerPower.CurrentPower >= SprintPower&& _cansprint)//移動中可衝刺
+            else if (_sprinting && PlayerPower.CurrentPower >= SprintPower && _cansprint)//移動中可衝刺
             {
                 rigidbody.AddForce(-dir * Time.deltaTime * SprintSpeed);
                 PlayerPower.Sub(SprintPower);
                 StartCoroutine(SprintingCountDown(SprintCountDown));
-                StartCoroutine(SpeedDownCountDown(1));
+                StartCoroutine(SprintSpeedDownCountDown(1));
             }
         }
 
         //操作
-        if (PlayerPower.CurrentPower > 0 && !_isPowering && !_collision&!_flying)
+        if (PlayerPower.CurrentPower > 0 && !_isPowering && !_collision & !_flying)
         {
             _cansprint = true;
             bool _isMoving = false;
@@ -105,15 +111,22 @@ public class Move5 : MonoBehaviour
             {
                 PlayerPower.Sub(PowerDownSpeed * Time.deltaTime);
             }
-               
+
         }
         _isPowering = false;
         if (rigidbody.velocity.magnitude >= MaxSpeed)
         {
-            if (!_speedDown)
+
+            if (!_collisionspeedDown)
             {
+              
+            }
+            else if (!_sprintspeedDown)
+            {
+                if (rigidbody.velocity.magnitude >= MaxSpeed * 2.5f)
+                    rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed * 2.5f;
                 //出現影分身
-                if(rigidbody.velocity.magnitude >=ShadowShowSpeed)
+                if (rigidbody.velocity.magnitude >= ShadowShowSpeed)
                     _afterImageEffects.Open = true;
                 else
                     _afterImageEffects.Open = false;
@@ -130,19 +143,25 @@ public class Move5 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            StartCoroutine(SpeedDownCountDown(2));//解除限速
-            StartCoroutine(CollisionCountDown(2));//不能控制
+            StartCoroutine(CollisionSpeedDownCountDown(1));//解除限速
+            StartCoroutine(CollisionCountDown(1));//不能控制
             Vector3 direction = (collision.transform.position - transform.position).normalized;
             float rate = collision.rigidbody.velocity.magnitude / (rigidbody.velocity.magnitude + collision.rigidbody.velocity.magnitude);
             rigidbody.AddForce(-direction * rate * 4, ForceMode.Force);
         }
     }
 
-    IEnumerator SpeedDownCountDown(float _time)//限速
-    {      
-        _speedDown = false;
+    IEnumerator SprintSpeedDownCountDown(float _time)//限速
+    {
+        _sprintspeedDown = false;
         yield return new WaitForSeconds(_time);
-        _speedDown = true;  
+        _sprintspeedDown = true;
+    }
+    IEnumerator CollisionSpeedDownCountDown(float _time)//限速
+    {
+        _collisionspeedDown = false;
+        yield return new WaitForSeconds(_time);
+        _collisionspeedDown = true;
     }
 
     IEnumerator SprintingCountDown(float _time)//衝刺CD
@@ -150,7 +169,7 @@ public class Move5 : MonoBehaviour
         _sprinting = false;
         yield return new WaitForSeconds(_time);
         _sprinting = true;
-       
+
     }
 
     IEnumerator CollisionCountDown(float _time)//collisoin
