@@ -47,7 +47,7 @@ public class tmpMove : MonoBehaviour
             }
             else if (_sprinting && PlayerPower.CurrentPower >= SprintPower)
             {
-                rigidbody.AddForce(-dir * Time.deltaTime * SprintSpeed,ForceMode.Impulse);
+                rigidbody.AddForce(-dir * Time.deltaTime * SprintSpeed, ForceMode.Force);
                 PlayerPower.Sub(SprintPower);
                 StartCoroutine(SprintingCountDown(SprintCountDown));
                 StartCoroutine(SpeedDownCountDown(1));
