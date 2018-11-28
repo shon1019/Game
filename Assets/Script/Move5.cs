@@ -18,6 +18,7 @@ public class Move5 : MonoBehaviour
     public float SprintPower = 10;//衝刺消耗POWER
     public float ShadowShowSpeed = 10;//出現影分身的速度
 
+    private bool _cansprint = true;
     private bool _isPowering = false;//是否集氣中(集氣中不能控制)
     private bool _sprinting = false;//是否衝刺CD
     private bool _speedDown = true;//是否正在限速
@@ -63,18 +64,19 @@ public class Move5 : MonoBehaviour
                 PlayerPower.Add(PowerUpSpeed * Time.deltaTime);
                 _isPowering = true;   
             }
-            else if (_sprinting && PlayerPower.CurrentPower >= SprintPower)//移動中可衝刺
+            else if (_sprinting && PlayerPower.CurrentPower >= SprintPower&& _cansprint)//移動中可衝刺
             {
                 rigidbody.AddForce(-dir * Time.deltaTime * SprintSpeed);
                 PlayerPower.Sub(SprintPower);
                 StartCoroutine(SprintingCountDown(SprintCountDown));
-                StartCoroutine(SpeedDownCountDown(1));           
+                StartCoroutine(SpeedDownCountDown(1));
             }
         }
 
         //操作
         if (PlayerPower.CurrentPower > 0 && !_isPowering && !_collision&!_flying)
         {
+            _cansprint = true;
             bool _isMoving = false;
             if (Input.GetKey(KeyCode.W))
             {
@@ -83,6 +85,7 @@ public class Move5 : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.S))
             {
+                _cansprint = false;
                 rigidbody.AddForce(dir * Time.deltaTime * RightSpeed);
                 _isMoving = true;
             }

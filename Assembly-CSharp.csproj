@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{CA5BEE03-BBCE-6A33-82A0-0B2245A33914}</ProjectGuid>
+    <ProjectGuid>{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -69,24 +69,30 @@
     <Compile Include="Assets\Script\AfterImageEffects.cs" />
     <Compile Include="Assets\Script\BounceTrap.cs" />
     <Compile Include="Assets\Script\CameraMove.cs" />
+    <Compile Include="Assets\Script\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\Script\DeathWall.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
+    <Compile Include="Assets\Script\LightPos.cs" />
     <Compile Include="Assets\Script\Move5.cs" />
     <Compile Include="Assets\Script\Power.cs" />
     <Compile Include="Assets\Script\tmpCameraMove.cs" />
     <Compile Include="Assets\Script\tmpMove.cs" />
+    <Compile Include="Assets\TreasureChestMaker\Example\Scripts\CameraControl.cs" />
+    <Compile Include="Assets\TreasureChestMaker\TCM\Scripts\ActivateChest.cs" />
+    <Compile Include="Assets\TreasureChestMaker\TCM\Scripts\TCMPrefabs.cs" />
     <None Include="Assets\Shader\DethWall.shader" />
+    <None Include="Assets\TreasureChestMaker\TCM\Documentation\ReadMe.txt" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>D:/拉基/Game-master/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>D:/學校/Game/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/拉基/Game-master/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/學校/Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/拉基/Game-master/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>D:/學校/Game/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/拉基/Game-master/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/學校/Game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

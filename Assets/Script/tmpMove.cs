@@ -88,7 +88,6 @@ public class tmpMove : MonoBehaviour
 
         }
         _isPowering = false;
-        Debug.Log(_speedDown);
         if (rigidbody.velocity.magnitude >= MaxSpeed)
         {
             if (!_speedDown)
@@ -108,7 +107,6 @@ public class tmpMove : MonoBehaviour
         {
             StartCoroutine(SpeedDownCountDown(2));//解除限速
             StartCoroutine(CollisionCountDown(2));//所玩家操作
-            Debug.Log("start" + _speedDown);
             Vector3 direction = (collision.transform.position - transform.position).normalized;
             float rate = collision.rigidbody.velocity.magnitude / (rigidbody.velocity.magnitude + collision.rigidbody.velocity.magnitude);
             rigidbody.AddForce(-direction * rate * 4, ForceMode.Force);  
