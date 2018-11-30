@@ -6,6 +6,13 @@ public class SoundEffectManager : MonoBehaviour {
 
     public AudioClip[] audioClips;
 
+    static SoundEffectManager One;
+
+    private void Start()
+    {
+        One = this;
+    }
+
     public enum EffectName
     {
         Dead,

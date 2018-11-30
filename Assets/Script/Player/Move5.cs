@@ -17,8 +17,14 @@ public class Move5 : MonoBehaviour
     public float SprintCountDown = 10;//集氣CD
     public float SprintPower = 10;//衝刺消耗POWER
     public float ShadowShowSpeed = 10;//出現影分身的速度
+    public bool  DontCollision
+    {
+        get{ return _dontCollision; }
+        set { _dontCollision = value; }
+    }
 
-    private bool _cansprint = true;
+    private bool _dontCollision = true;//會不會被撞飛 true : 不會被撞飛
+    private bool _cansprint = true;   //是否可以衝刺(後退時不可衝刺)
     private bool _isPowering = false;//是否集氣中(集氣中不能控制)
     private bool _sprinting = false;//是否衝刺CD
     private bool _sprintspeedDown = true;//是否正在限速
@@ -141,7 +147,7 @@ public class Move5 : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player"&& !_dontCollision)
         {
             StartCoroutine(CollisionSpeedDownCountDown(1));//解除限速
             StartCoroutine(CollisionCountDown(1));//不能控制
