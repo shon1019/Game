@@ -46,8 +46,9 @@ public class Move5 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log("Flying" + _flying);
         RaycastHit hit;//判斷離地
-        if (Physics.Raycast(transform.position - new Vector3(0, 0.1f, 0), -new Vector3(0, 1, 0), out hit, 1f))
+        if (Physics.Raycast(transform.position - new Vector3(0, 0.1f, 0), -new Vector3(0, 1, 0), out hit, 0.5f))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {

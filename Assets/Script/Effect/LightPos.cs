@@ -13,7 +13,6 @@ public class LightPos : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(BoxPos.position);
         transform.position = new Vector3(BoxPos.position.x, -3, BoxPos.position.z);
         
 	}

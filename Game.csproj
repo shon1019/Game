@@ -346,6 +346,8 @@
     <Compile Include="Assets\Script\Sound\MusicManager.cs" />
     <Compile Include="Assets\Script\Sound\SoundEffectManager.cs" />
     <Compile Include="Assets\Script\tmpCameraMove.cs" />
+    <Compile Include="Assets\Scripts\PlayerPeople.cs" />
+    <Compile Include="Assets\Scripts\PlayerSelect.cs" />
     <Compile Include="Assets\TreasureChestMaker\Example\Scripts\CameraControl.cs" />
     <Compile Include="Assets\TreasureChestMaker\TCM\Scripts\ActivateChest.cs" />
     <Compile Include="Assets\TreasureChestMaker\TCM\Scripts\TCMPrefabs.cs" />
