@@ -15,6 +15,7 @@ public class ActivateChest : MonoBehaviour {
 			ChestClicked(lidOpen.rotation);
 		}
 		else{
+            transform.position =  new Vector3(transform.position.x, transform.position.y-1 * Time.deltaTime, transform.position.z);
 			ChestClicked(lidClose.rotation);
 		}
 	}

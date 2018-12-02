@@ -7,16 +7,31 @@ public class GameManager : MonoBehaviour {
     public GameObject _deathWall;
     public int _totalTime = 210;// 180 120 60 縮圈
     public int _currentTime = 210;
+    public GameObject Treasure;
+    public Transform []TreasurePoint;
 
+    private bool _treasureAppera = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         StartCoroutine(Discount());
-	}
+        _treasureAppera = false;
+        StartCoroutine(TreasureAppera());
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        if (_treasureAppera)
+        {
+            int ran = Random.Range(0, TreasurePoint.Length);
+            Vector3 tmpPoint = TreasurePoint[ran].position;
+            GameObject.Instantiate(Treasure, tmpPoint, new Quaternion(-90, 0, 0, 0));
+            _treasureAppera = false;
+            StartCoroutine(TreasureAppera());
+        }
+            
+
         if (_currentTime <= 180 && _currentTime >= 150) //一階段縮圈 scale(10000,10000) -> scale(8000,8000)  
         {
             float delta = (_currentTime - 150) / 30f;
@@ -50,6 +65,15 @@ public class GameManager : MonoBehaviour {
         {
             yield return new WaitForSeconds(1f);
             _currentTime -= 1;
+        }
+    }
+
+    IEnumerator TreasureAppera()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(20f);
+            _treasureAppera = true;
         }
     }
 

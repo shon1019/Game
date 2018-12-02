@@ -409,6 +409,7 @@
   <ItemGroup>
     <None Include="Assets\Prefab\FireWall\FireWall.shader" />
     <None Include="Assets\Prefab\FireWall\FireWall_Line.shader" />
+    <None Include="Assets\Prefab\FreeDungeon\freeDungeon_ReadMe.txt" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\ThirdPartyLicenses.txt" />
