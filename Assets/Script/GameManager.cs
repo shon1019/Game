@@ -5,32 +5,42 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public GameObject _deathWall;
+
     public int _totalTime = 210;// 180 120 60 縮圈
     public int _currentTime = 210;
+    public int _revivedTime = 5;
+
+    public GameObject Player;
     public GameObject Treasure;
     public Transform []TreasurePoint;
 
-    private bool _treasureAppera = false;
+    //玩家是否存活
+    public bool _IsPlayerSurvived = true;
+    private bool _treasureAppear = false;
+    
+
+
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         StartCoroutine(Discount());
-        _treasureAppera = false;
-        StartCoroutine(TreasureAppera());
+        StartCoroutine(TreasureAppear());
+
+        _treasureAppear = false;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (_treasureAppera)
+        if (_treasureAppear)
         {
             int ran = Random.Range(0, TreasurePoint.Length);
             Vector3 tmpPoint = TreasurePoint[ran].position;
             GameObject.Instantiate(Treasure, tmpPoint, new Quaternion(-90, 0, 0, 0));
-            _treasureAppera = false;
-            StartCoroutine(TreasureAppera());
+            _treasureAppear = false;
+            StartCoroutine(TreasureAppear());
         }
-            
 
         if (_currentTime <= 180 && _currentTime >= 150) //一階段縮圈 scale(10000,10000) -> scale(8000,8000)  
         {
@@ -55,9 +65,14 @@ public class GameManager : MonoBehaviour {
         {
 
         }
-
-
 	}
+
+    //重生事件
+    public void Revived()
+    {
+        StartCoroutine(Revive(_revivedTime));
+    }
+
 
     IEnumerator Discount()
     {
@@ -68,13 +83,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    IEnumerator TreasureAppera()
+    IEnumerator TreasureAppear()
     {
         while (true)
         {
             yield return new WaitForSeconds(20f);
-            _treasureAppera = true;
+            _treasureAppear = true;
         }
     }
 
+    //重生
+    IEnumerator Revive(int t)
+    {
+        yield return new WaitForSeconds(t);
+        Player.SetActive(true);
+        Player.transform.position = new Vector3(0, 0f, 0); //設定重生點
+        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+        _IsPlayerSurvived = true;
+    }
 }

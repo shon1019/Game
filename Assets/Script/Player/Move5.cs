@@ -17,6 +17,7 @@ public class Move5 : MonoBehaviour
     public float SprintCountDown = 10;//集氣CD
     public float SprintPower = 10;//衝刺消耗POWER
     public float ShadowShowSpeed = 10;//出現影分身的速度
+
     public bool  DontCollision
     {
         get{ return _dontCollision; }
@@ -33,12 +34,12 @@ public class Move5 : MonoBehaviour
     private bool _flying = false;//是否離地(離地不能控制)
 
     private RaycastHit hit;
-    private Rigidbody rigidbody;
+    private Rigidbody rby;
     private AfterImageEffects _afterImageEffects;
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rby = GetComponent<Rigidbody>();
         _afterImageEffects = GetComponent<AfterImageEffects>();
         StartCoroutine(SprintingCountDown(1));
     }
@@ -71,14 +72,14 @@ public class Move5 : MonoBehaviour
         //集氣
         if (Input.GetButton("Jump"))
         {
-            if (rigidbody.velocity.magnitude < StopThreshold)//集氣
+            if (rby.velocity.magnitude < StopThreshold)//集氣
             {
                 PlayerPower.Add(PowerUpSpeed * Time.deltaTime);
                 _isPowering = true;
             }
             else if (_sprinting && PlayerPower.CurrentPower >= SprintPower && _cansprint)//移動中可衝刺
             {
-                rigidbody.AddForce(-dir * Time.deltaTime * SprintSpeed);
+                rby.AddForce(-dir * Time.deltaTime * SprintSpeed);
                 PlayerPower.Sub(SprintPower);
                 StartCoroutine(SprintingCountDown(SprintCountDown));
                 StartCoroutine(SprintSpeedDownCountDown(1));
@@ -92,25 +93,25 @@ public class Move5 : MonoBehaviour
             bool _isMoving = false;
             if (Input.GetKey(KeyCode.W))
             {
-                rigidbody.AddForce(-dir * Time.deltaTime * ForwardSpeed);
+                rby.AddForce(-dir * Time.deltaTime * ForwardSpeed);
                 _isMoving = true;
             }
             if (Input.GetKey(KeyCode.S))
             {
                 _cansprint = false;
-                rigidbody.AddForce(dir * Time.deltaTime * RightSpeed);
+                rby.AddForce(dir * Time.deltaTime * RightSpeed);
                 _isMoving = true;
             }
             if (Input.GetKey(KeyCode.A))
             {
                 dir = Vector3.Cross(dir, new Vector3(0, 1, 0));
-                rigidbody.AddForce(-dir * Time.deltaTime * RightSpeed);
+                rby.AddForce(-dir * Time.deltaTime * RightSpeed);
                 _isMoving = true;
             }
             if (Input.GetKey(KeyCode.D))
             {
                 dir = Vector3.Cross(dir, new Vector3(0, 1, 0));
-                rigidbody.AddForce(dir * Time.deltaTime * RightSpeed);
+                rby.AddForce(dir * Time.deltaTime * RightSpeed);
                 _isMoving = true;
             }
             if (_isMoving)
@@ -120,7 +121,7 @@ public class Move5 : MonoBehaviour
 
         }
         _isPowering = false;
-        if (rigidbody.velocity.magnitude >= MaxSpeed)
+        if (rby.velocity.magnitude >= MaxSpeed)
         {
 
             if (!_collisionspeedDown)
@@ -129,17 +130,17 @@ public class Move5 : MonoBehaviour
             }
             else if (!_sprintspeedDown)
             {
-                if (rigidbody.velocity.magnitude >= MaxSpeed * 2.5f)
-                    rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed * 2.5f;
+                if (rby.velocity.magnitude >= MaxSpeed * 2.5f)
+                    rby.velocity = rby.velocity.normalized * MaxSpeed * 2.5f;
                 //出現影分身
-                if (rigidbody.velocity.magnitude >= ShadowShowSpeed)
+                if (rby.velocity.magnitude >= ShadowShowSpeed)
                     _afterImageEffects.Open = true;
                 else
                     _afterImageEffects.Open = false;
             }
             else
             {
-                rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed;
+                rby.velocity = rby.velocity.normalized * MaxSpeed;
                 _afterImageEffects.Open = false;
             }
         }
@@ -152,25 +153,29 @@ public class Move5 : MonoBehaviour
             StartCoroutine(CollisionSpeedDownCountDown(1));//解除限速
             StartCoroutine(CollisionCountDown(1));//不能控制
             Vector3 direction = (collision.transform.position - transform.position).normalized;
-            float rate = collision.rigidbody.velocity.magnitude / (rigidbody.velocity.magnitude + collision.rigidbody.velocity.magnitude);
-            rigidbody.AddForce(-direction * rate * 4, ForceMode.Force);
+            float rate = collision.rigidbody.velocity.magnitude / (rby.velocity.magnitude + collision.rigidbody.velocity.magnitude);
+            rby.AddForce(-direction * rate * 4, ForceMode.Force);
         }
     }
 
-    IEnumerator SprintSpeedDownCountDown(float _time)//限速
+    //限速
+    IEnumerator SprintSpeedDownCountDown(float _time)
     {
         _sprintspeedDown = false;
         yield return new WaitForSeconds(_time);
         _sprintspeedDown = true;
     }
-    IEnumerator CollisionSpeedDownCountDown(float _time)//限速
+
+    //限速
+    IEnumerator CollisionSpeedDownCountDown(float _time)
     {
         _collisionspeedDown = false;
         yield return new WaitForSeconds(_time);
         _collisionspeedDown = true;
     }
 
-    IEnumerator SprintingCountDown(float _time)//衝刺CD
+    //衝刺CD
+    IEnumerator SprintingCountDown(float _time)
     {
         _sprinting = false;
         yield return new WaitForSeconds(_time);
@@ -178,7 +183,8 @@ public class Move5 : MonoBehaviour
 
     }
 
-    IEnumerator CollisionCountDown(float _time)//collisoin
+    //collision
+    IEnumerator CollisionCountDown(float _time)
     {
         _collision = true;
         yield return new WaitForSeconds(_time);
