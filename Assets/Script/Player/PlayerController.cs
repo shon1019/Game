@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move5 : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    //Player Info
+    public int PlayerId; // 0 1 2 3
+    public int Money = 0;
+
+    //Kill Info :　LastCollisionPlayer若為自身　或者　LastCollisionTime = -1  算是自殺
+    public int LastCollisionPlayer;
+    public float LastCollisionTime = 10f;
 
     public Transform Camera;
     public Power PlayerPower;
@@ -42,6 +49,8 @@ public class Move5 : MonoBehaviour
         rby = GetComponent<Rigidbody>();
         _afterImageEffects = GetComponent<AfterImageEffects>();
         StartCoroutine(SprintingCountDown(1));
+
+        LastCollisionPlayer = PlayerId;//初始化為自己
     }
 
     // Update is called once per frame
@@ -155,6 +164,12 @@ public class Move5 : MonoBehaviour
             Vector3 direction = (collision.transform.position - transform.position).normalized;
             float rate = collision.rigidbody.velocity.magnitude / (rby.velocity.magnitude + collision.rigidbody.velocity.magnitude);
             rby.AddForce(-direction * rate * 4, ForceMode.Force);
+
+            //更新碰撞紀錄
+            if (collision.gameObject.GetComponent<PlayerController>().PlayerId != this.LastCollisionPlayer) {
+                this.LastCollisionPlayer = collision.gameObject.GetComponent<PlayerController>().PlayerId;
+                this.LastCollisionTime = 10f;
+            }
         }
     }
 
@@ -190,6 +205,16 @@ public class Move5 : MonoBehaviour
         yield return new WaitForSeconds(_time);
         _collision = false;
 
+    }
+
+
+    IEnumerator LastCollisonTimeDiscount()
+    {
+        while (LastCollisionTime >= 0)
+        {
+            yield return new WaitForSeconds(1f);
+            LastCollisionTime -= 1f;
+        }
     }
 
 }

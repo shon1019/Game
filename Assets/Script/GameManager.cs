@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator Discount()
     {
-        while (true)
+        while (_currentTime > 0)
         {
             yield return new WaitForSeconds(1f);
             _currentTime -= 1;

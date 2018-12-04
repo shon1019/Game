@@ -75,7 +75,7 @@
     <Compile Include="Assets\Script\Effect\LightPos.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Player\CameraMove.cs" />
-    <Compile Include="Assets\Script\Player\Move5.cs" />
+    <Compile Include="Assets\Script\Player\PlayerController.cs" />
     <Compile Include="Assets\Script\Player\Power.cs" />
     <Compile Include="Assets\Script\Player\tmpMove.cs" />
     <Compile Include="Assets\Script\Sound\MusicManager.cs" />
