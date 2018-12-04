@@ -6,8 +6,8 @@ public class CameraMove : MonoBehaviour
 {
     public Transform target;
     public float High = 1;//相機高度
-    public float XSpeed = 1;//左右速度
-    public float Distance = 1;//相機多遠
+    public float XSpeed = 1;//調整視角左右速度
+    public float Distance = 1;//背後相機多遠
 
     private float _x;
     private Quaternion rotationEugler;
@@ -16,8 +16,9 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target==null)
-        {
+        //死亡固定俯視相機
+        if(!target.gameObject.active)
+        {        
             this.transform.position = new Vector3(0, 70, 0);
             this.transform.rotation = Quaternion.Euler(90, 0, 0);
         }

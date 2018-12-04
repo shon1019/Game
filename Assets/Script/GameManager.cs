@@ -6,34 +6,62 @@ public class GameManager : MonoBehaviour
 {
 
     public GameObject _deathWall;
+
     public int _totalTime = 210;// 180 120 60 縮圈
     public int _currentTime = 210;
+<<<<<<< HEAD
     public float TreasureAppearTime = 30;
+=======
+    public int _revivedTime = 5;
+
+    public GameObject Player;
+>>>>>>> 4c37fd7d3b1b7ddda4dcbfa60fdbe310d9cb65f7
     public GameObject Treasure;
     public Transform[] TreasurePoint;
 
-    private bool _treasureAppera = false;
+    //玩家是否存活
+    public bool _IsPlayerSurvived = true;
+    private bool _treasureAppear = false;
+    
+
+
 
     // Use this for initialization
+<<<<<<< HEAD
     void Start()
     {
         StartCoroutine(Discount());
         _treasureAppera = false;
         StartCoroutine(TreasureAppear());
+=======
+    void Start ()
+    {
+        StartCoroutine(Discount());
+        StartCoroutine(TreasureAppear());
+
+        _treasureAppear = false;
+>>>>>>> 4c37fd7d3b1b7ddda4dcbfa60fdbe310d9cb65f7
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_treasureAppera)
+        if (_treasureAppear)
         {
             int ran = Random.Range(0, TreasurePoint.Length);
             Vector3 tmpPoint = TreasurePoint[ran].position;
+<<<<<<< HEAD
             GameObject.Instantiate(Treasure, tmpPoint, new Quaternion(0, 0, 0, 0));
             _treasureAppera = false;
             StartCoroutine(TreasureAppear());
         }
 
+=======
+            GameObject.Instantiate(Treasure, tmpPoint, new Quaternion(-90, 0, 0, 0));
+            _treasureAppear = false;
+            StartCoroutine(TreasureAppear());
+        }
+>>>>>>> 4c37fd7d3b1b7ddda4dcbfa60fdbe310d9cb65f7
 
         if (_currentTime <= 180 && _currentTime >= 150) //一階段縮圈 scale(10000,10000) -> scale(8000,8000)  
         {
@@ -58,13 +86,26 @@ public class GameManager : MonoBehaviour
         {
 
         }
+	}
 
+    //重生事件
+    public void Revived()
+    {
+        StartCoroutine(Revive(_revivedTime));
+    }
 
+<<<<<<< HEAD
     }
 
     IEnumerator Discount()
     {
         while (_currentTime>0)
+=======
+
+    IEnumerator Discount()
+    {
+        while (_currentTime > 0)
+>>>>>>> 4c37fd7d3b1b7ddda4dcbfa60fdbe310d9cb65f7
         {
             yield return new WaitForSeconds(1f);
             _currentTime -= 1;
@@ -73,10 +114,29 @@ public class GameManager : MonoBehaviour
 
     IEnumerator TreasureAppear()
     {
+<<<<<<< HEAD
 
         yield return new WaitForSeconds(TreasureAppearTime);
         _treasureAppera = true;
 
+=======
+        while (true)
+        {
+            yield return new WaitForSeconds(20f);
+            _treasureAppear = true;
+        }
+>>>>>>> 4c37fd7d3b1b7ddda4dcbfa60fdbe310d9cb65f7
     }
 
+    //重生
+    IEnumerator Revive(int t)
+    {
+        yield return new WaitForSeconds(t);
+        Player.SetActive(true);
+        Player.transform.position = new Vector3(0, 0f, 0); //設定重生點
+        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+        _IsPlayerSurvived = true;
+    }
 }
