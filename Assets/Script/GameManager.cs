@@ -20,10 +20,10 @@ public class GameManager : MonoBehaviour {
             pos = _deathWall.transform.position;
         }
 
-        if (_currentTime <= 180 && _currentTime >= 150)     //  一階段縮圈 scale(10000,10000) -> scale(8000,8000)  
+        if (_currentTime <= 180 && _currentTime >= 150)     //  一階段縮圈 scale(11000,11000) -> scale(8000,8000)  
         {
             float delta = (_currentTime - 150) / 30f;
-            _deathWall.transform.localScale = Vector3.Lerp(new Vector3(8000, 3500, 8000), new Vector3(10000, 3500, 10000), delta);
+            _deathWall.transform.localScale = Vector3.Lerp(new Vector3(8000, 3500, 8000), new Vector3(11000, 3500, 11000), delta);
             _deathWall.transform.position = Vector3.Lerp(new Vector3(rand_pos.x, 0, rand_pos.y), pos, delta);
         }
         else if (_currentTime <= 120 && _currentTime >= 90) //  二階段縮圈 scale(8000,8000) -> scale(6000,6000)
