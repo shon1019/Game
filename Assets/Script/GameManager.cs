@@ -7,10 +7,12 @@ public class GameManager : MonoBehaviour {
     public GameObject _deathWall;
     public int _totalTime = 210;    // 180 120 60 縮圈
     public int _currentTime = 210;
+    public GameObject treasure;
     private Vector2 rand_pos;
     private Vector3 pos;
 	void Start () {
         StartCoroutine(Discount());
+        InvokeRepeating("CreateTreasure",1f,3f);
 	}
 	
 	void Update ()
@@ -23,19 +25,19 @@ public class GameManager : MonoBehaviour {
         if (_currentTime <= 180 && _currentTime >= 150)     //  一階段縮圈 scale(11000,11000) -> scale(8000,8000)  
         {
             float delta = (_currentTime - 150) / 30f;
-            _deathWall.transform.localScale = Vector3.Lerp(new Vector3(8000, 3500, 8000), new Vector3(11000, 3500, 11000), delta);
+            _deathWall.transform.localScale = Vector3.Lerp(new Vector3(8000, 10000, 8000), new Vector3(11000, 10000, 11000), delta);
             _deathWall.transform.position = Vector3.Lerp(new Vector3(rand_pos.x, 0, rand_pos.y), pos, delta);
         }
         else if (_currentTime <= 120 && _currentTime >= 90) //  二階段縮圈 scale(8000,8000) -> scale(6000,6000)
         {
             float delta = (_currentTime - 90) / 30f;
-            _deathWall.transform.localScale = Vector3.Lerp(new Vector3(6000, 3500, 6000), new Vector3(8000, 3500, 8000), delta);
+            _deathWall.transform.localScale = Vector3.Lerp(new Vector3(6000, 10000, 6000), new Vector3(8000, 10000, 8000), delta);
             _deathWall.transform.position = Vector3.Lerp(new Vector3(rand_pos.x, 0, rand_pos.y), pos, delta);
         }
         else if (_currentTime <= 60 && _currentTime >= 30)  //  三階段縮圈 scale(6000,6000) -> scale(4000,4000)
         {
             float delta = (_currentTime - 30) / 30f;
-            _deathWall.transform.localScale = Vector3.Lerp(new Vector3(4000, 3500, 4000), new Vector3(6000, 3500, 6000), delta);
+            _deathWall.transform.localScale = Vector3.Lerp(new Vector3(4000, 10000, 4000), new Vector3(6000, 10000, 6000), delta);
             _deathWall.transform.position = Vector3.Lerp(new Vector3(rand_pos.x, 0, rand_pos.y), pos, delta);
         }
         else if (_currentTime == 0) //  結算面板
@@ -57,5 +59,9 @@ public class GameManager : MonoBehaviour {
         int x = Random.Range(-length, length);
         int z = Random.Range(-length, length);
         return new Vector2(x, z);
+    }
+    private void CreateTreasure() {
+        Vector2 where = RandomCenter(100 - _currentTime / 60);
+        Instantiate(treasure, new Vector3(pos.x + where.x, 10f, pos.z + where.y),Quaternion.identity);
     }
 }

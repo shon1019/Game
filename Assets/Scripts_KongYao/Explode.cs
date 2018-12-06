@@ -28,7 +28,7 @@ public class Explode : MonoBehaviour {
                     if (rb)
                     {
                         rb.isKinematic = false;
-                        rb.AddExplosionForce(_power, this.transform.position, _radius, _upPower, ForceMode.Impulse);
+                        rb.AddExplosionForce(_power, this.transform.position, _radius, _upPower, ForceMode.Force);
                     }
                 }
             }
