@@ -321,17 +321,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Old\Move.cs" />
-    <Compile Include="Assets\Old\Move2.cs" />
-    <Compile Include="Assets\Old\Move3.cs" />
-    <Compile Include="Assets\Old\Move4.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Misc\HueCube.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Procedural Mesh\ExtrudeRandomEdges.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Runtime Editing\RuntimeEdit.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
-    <Compile Include="Assets\Script\Bigger.cs" />
+    <Compile Include="Assets\Script\ActivateChest.cs" />
     <Compile Include="Assets\Script\BounceTrap.cs" />
     <Compile Include="Assets\Script\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\Script\DeathWall.cs" />
@@ -340,7 +336,8 @@
     <Compile Include="Assets\Script\Effect\LightPos.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Player\CameraMove.cs" />
-    <Compile Include="Assets\Script\Player\Move5.cs" />
+    <Compile Include="Assets\Script\Player\PlayerController.cs" />
+    <Compile Include="Assets\Script\Player\Point.cs" />
     <Compile Include="Assets\Script\Player\Power.cs" />
     <Compile Include="Assets\Script\Player\tmpMove.cs" />
     <Compile Include="Assets\Script\Sound\MusicManager.cs" />
@@ -349,7 +346,6 @@
     <Compile Include="Assets\Scripts\PlayerPeople.cs" />
     <Compile Include="Assets\Scripts\PlayerSelect.cs" />
     <Compile Include="Assets\TreasureChestMaker\Example\Scripts\CameraControl.cs" />
-    <Compile Include="Assets\TreasureChestMaker\TCM\Scripts\ActivateChest.cs" />
     <Compile Include="Assets\TreasureChestMaker\TCM\Scripts\TCMPrefabs.cs" />
   </ItemGroup>
   <ItemGroup>

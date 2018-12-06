@@ -2018,6 +2018,7 @@ MonoBehaviour:
   lidClose: {fileID: 4102585178127078}
   openSpeed: 5
   canClose: 0
+  AutoDisstory: 30
   _open: 0
 --- !u!198 &198730242195878628
 ParticleSystem:
