@@ -53,6 +53,7 @@ public class ActivateChest : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>().AddPoint(1);
             Destroy(this.gameObject);
             //獲得效果
+
         }
     }
 

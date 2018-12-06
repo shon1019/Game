@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        AddPoint(4);
         rby = GetComponent<Rigidbody>();
         StartCoroutine(SprintingCountDown(1));
         LastCollisionPlayer = PlayerId;//初始化為自己
@@ -54,9 +55,8 @@ public class PlayerController : MonoBehaviour
 
 
         RaycastHit hit;//判斷離地
-        if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 0.9f))
+        if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 1.2f))
         {
-
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
 
@@ -148,8 +148,8 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(CollisionCountDown(1));//不能控制
             Vector3 direction = (collision.transform.position - transform.position).normalized;
             float rate = collision.rigidbody.velocity.magnitude / (rby.velocity.magnitude + collision.rigidbody.velocity.magnitude);
-            rby.AddForce(-direction * rate * 4, ForceMode.Force);
-
+            rby.AddForce(-direction * rate * 5, ForceMode.Force);
+            Debug.Log(this.LastCollisionPlayer + "attack" + collision.gameObject.GetComponent<PlayerController>().PlayerId);
             //更新碰撞紀錄
             if (collision.gameObject.GetComponent<PlayerController>().PlayerId != this.LastCollisionPlayer)
             {

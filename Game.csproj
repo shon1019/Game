@@ -340,9 +340,13 @@
     <Compile Include="Assets\Script\Player\Point.cs" />
     <Compile Include="Assets\Script\Player\Power.cs" />
     <Compile Include="Assets\Script\Player\tmpMove.cs" />
+    <Compile Include="Assets\Script\Player\UIPos.cs" />
     <Compile Include="Assets\Script\Sound\MusicManager.cs" />
     <Compile Include="Assets\Script\Sound\SoundEffectManager.cs" />
     <Compile Include="Assets\Script\tmpCameraMove.cs" />
+    <Compile Include="Assets\Scripts\Barrel.cs" />
+    <Compile Include="Assets\Scripts\Bomb.cs" />
+    <Compile Include="Assets\Scripts\Fracture.cs" />
     <Compile Include="Assets\Scripts\PlayerPeople.cs" />
     <Compile Include="Assets\Scripts\PlayerSelect.cs" />
     <Compile Include="Assets\TreasureChestMaker\Example\Scripts\CameraControl.cs" />
@@ -352,6 +356,7 @@
     <None Include="Assets\Prefab\FireWall\FireWall.shader" />
     <None Include="Assets\Prefab\FireWall\FireWall_Line.shader" />
     <None Include="Assets\Prefab\FreeDungeon\freeDungeon_ReadMe.txt" />
+    <None Include="Assets\Prefabs\SceneObject\Material\Shader\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\ThirdPartyLicenses.txt" />

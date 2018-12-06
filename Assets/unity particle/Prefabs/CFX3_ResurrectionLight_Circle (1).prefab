@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4142339486225562}
   - component: {fileID: 198141214169578426}
   - component: {fileID: 199493365889549624}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CFX3 Rays
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4673506070970358}
   - component: {fileID: 198628734243420146}
   - component: {fileID: 199209347765215166}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CFX3 Stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4153131503705234}
   - component: {fileID: 198689762441167392}
   - component: {fileID: 199520258285077814}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CFX3 Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4529409071861566}
   - component: {fileID: 198972188164273164}
   - component: {fileID: 199552634306039082}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CFX3_ResurrectionLight_Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1546477126586432}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -16.950317, y: -2.2586484, z: -25.386536}
+  m_LocalPosition: {x: -3.2666016, y: -3.5037155, z: 8.880554}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4142339486225562}

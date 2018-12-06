@@ -41,13 +41,23 @@ public class GameManager : MonoBehaviour
         //生成寶箱
         if (_treasureAppera)
         {
-            Vector3 tmpPoint;
-            if (_currentTime <= 180 && _currentTime >= 150)
-                tmpPoint = new Vector3(Random.Range(40, 90), 300, Random.Range(40, 90));
+            Vector3 tmpPoint=new Vector3(0,0,0);
+            float dis;
+            if (_currentTime >= 180)
+                dis = Random.Range(60, 75);
+            else if (_currentTime <= 180 && _currentTime >= 120)
+                dis = Random.Range(50, 65);
             else if (_currentTime <= 120 && _currentTime >= 90)
-                tmpPoint = new Vector3(Random.Range(40, 65), 300, Random.Range(40, 65));
+                dis = Random.Range(40, 55);
             else 
-                tmpPoint = new Vector3(Random.Range(0, 30), 300, Random.Range(0, 30));
+                dis = Random.Range(0, 30);
+            
+            float angle = Random.Range(0, 360);
+           
+            tmpPoint.x = Mathf.Cos(angle);
+            tmpPoint.z = Mathf.Sin(angle);
+            tmpPoint *= dis;
+            tmpPoint.y = 250;
             GameObject.Instantiate(Treasure, tmpPoint, new Quaternion(0, 0, 0, 0));
             _treasureAppera = false;
             StartCoroutine(TreasureAppear());
@@ -108,8 +118,8 @@ public class GameManager : MonoBehaviour
     {
        
         //************************************tmp
-        int RanX = Random.Range(-40, 40);
-        int RanZ = Random.Range(-40, 40);
+        int RanX = Random.Range(-30, 30);
+        int RanZ = Random.Range(-30, 30);
         Player[playerID].transform.position = new Vector3(RanX, 2f, RanZ); //設定重生點
         Player[playerID].GetComponent<Rigidbody>().velocity = Vector3.zero;
         Player[playerID].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
