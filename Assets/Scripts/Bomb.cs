@@ -22,7 +22,7 @@ public class Bomb : MonoBehaviour
             if (rb)
             {
                 rb.isKinematic = false;
-                rb.AddExplosionForce(_power, this.transform.position, _radius, _upPower, ForceMode.Impulse);
+                rb.AddExplosionForce(_power, this.transform.position, _radius, _upPower, ForceMode.Force);
             }
             if (c.tag != "Player" && c.tag != "Ground")
                 Destroy(c.gameObject, _lifeTime);

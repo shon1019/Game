@@ -17,7 +17,10 @@ public class DeathWall : MonoBehaviour {
             PlayerController tmpPlayerController = other.GetComponent<PlayerController>();//玩冠轉移
             if(tmpPlayerController.LastCollisionPlayer!=-1)
             {
-                
+                //玩家死掉後會再生成一個寶箱
+                Vector3 treasurePos = other.gameObject.transform.position*0.7f;
+                GameManager.One.InstanceTreasure(treasurePos);
+
                 int totalNumber = tmpPlayerController.Points.Count;
                 int loseNumber = totalNumber / 4;
                 Debug.Log("Tran Crown" + totalNumber + "+" + loseNumber);

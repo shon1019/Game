@@ -17,11 +17,20 @@ public class GameManager : MonoBehaviour
 
     public float TreasureAppearTime = 1;
     public GameObject Treasure;
+    public GameObject Barrel;
     public ParticleSystem Reviveparticle;
+    public GameObject ChampionUI;
+    public int Champion
+    {
+        get { return _champion; }
+        set { _champion = value; }
+    }
+    public GameObject[] PlayerUI;
 
+    private int _champion = 0;
     //玩家是否存活
     private bool _treasureAppera = false;
-
+    private PlayerController[] _playerControllers;
     private void Awake()
     {
         One = this;
@@ -33,11 +42,40 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Discount());
         _treasureAppera = false;
         StartCoroutine(TreasureAppear());
+        _playerControllers = new PlayerController[Player.Length];
+        for (int i = 0; i < Player.Length; i++)
+            _playerControllers[i] = Player[i].GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //排名
+        
+        int championPoint = 0;
+        for (int i=0;i< _playerControllers.Length;i++)
+        {
+            //Debug.Log("player" + i + "point " + _playerControllers[i].Points.Count+"ch  "+ _champion);
+            if (_playerControllers[i].Points.Count > championPoint)
+            {
+                _champion = i;
+            }
+               
+        }
+        ChampionUI.transform.position = Player[_champion].transform.position + new Vector3(0, 10, 0);
+ 
+        for(int i=0;i< PlayerUI.Length;i++)
+        {
+
+            if (i == _champion)
+            {
+                PlayerUI[i].SetActive(false);
+                Debug.Log(PlayerUI[i].name);
+            }
+                
+            else
+                PlayerUI[i].SetActive(true);
+        }
         //生成寶箱
         if (_treasureAppera)
         {
@@ -57,10 +95,8 @@ public class GameManager : MonoBehaviour
             tmpPoint.x = Mathf.Cos(angle);
             tmpPoint.z = Mathf.Sin(angle);
             tmpPoint *= dis;
-            tmpPoint.y = 250;
-            GameObject.Instantiate(Treasure, tmpPoint, new Quaternion(0, 0, 0, 0));
-            _treasureAppera = false;
-            StartCoroutine(TreasureAppear());
+            tmpPoint.y = 200;
+            InstanceTreasure(tmpPoint);
         }
 
 
@@ -95,6 +131,22 @@ public class GameManager : MonoBehaviour
     public void Revived(int playerID)
     {
         StartCoroutine(Revive(_revivedTime, playerID));
+    }
+
+    //生成寶箱|油桶
+    public void InstanceTreasure(Vector3 pos)
+    {
+        int ran = Random.Range(0, 4);
+        if(ran<3)
+        {
+            GameObject.Instantiate(Treasure, pos, new Quaternion(0, 0, 0, 0));
+        }
+        else
+        {
+            GameObject.Instantiate(Barrel, pos, new Quaternion(0, 0, 0, 0));   
+        }
+        _treasureAppera = false;
+        StartCoroutine(TreasureAppear());
     }
 
     IEnumerator Discount()

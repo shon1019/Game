@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        AddPoint(4);
         rby = GetComponent<Rigidbody>();
         StartCoroutine(SprintingCountDown(1));
         LastCollisionPlayer = PlayerId;//初始化為自己
@@ -55,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
 
         RaycastHit hit;//判斷離地
-        if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 1.2f))
+        if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 1f))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
