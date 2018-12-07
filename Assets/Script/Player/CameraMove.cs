@@ -6,23 +6,32 @@ public class CameraMove : MonoBehaviour
 {
     public Transform target;
     public float High = 1;//相機高度
-    public float XSpeed = 1;//左右速度
-    public float Distance = 1;//相機多遠
+    public float XSpeed = 1;//調整視角左右速度
+    public float Distance = 1;//背後相機多遠
 
     private float _x;
     private Quaternion rotationEugler;
     private Vector3 cameraPosition;
+    private bool dead = false;
+    private bool lookDeadParticle = false;
 
     // Update is called once per frame
     void Update()
     {
-        if(target==null)
+        //死亡固定俯視相機
+        if (!target.gameObject.active && !dead)
         {
-            this.transform.position = new Vector3(0, 70, 0);
-            this.transform.rotation = Quaternion.Euler(90, 0, 0);
+            StartCoroutine(DeadCamera());
         }
-        else
+        else if (target.gameObject.active)
         {
+            dead = false;
+        }
+
+        if (!lookDeadParticle)
+        {
+
+
             if (Input.GetKey(KeyCode.J))
                 _x -= XSpeed * Time.deltaTime;
             if (Input.GetKey(KeyCode.K))
@@ -32,11 +41,27 @@ public class CameraMove : MonoBehaviour
                 _x -= 360;
             else if (_x < 0)
                 _x += 360;
-
-            rotationEugler = Quaternion.Euler(High, _x, 0);
+            if (dead && !lookDeadParticle)
+            {
+                rotationEugler = Quaternion.Euler(High + 15, _x, 0);
+            }
+            else
+            {
+                rotationEugler = Quaternion.Euler(High, _x, 0);
+            }
             cameraPosition = rotationEugler * new Vector3(0, 0, -Distance) + target.position;
             transform.rotation = rotationEugler;
             transform.position = cameraPosition;
+
         }
     }
+
+    IEnumerator DeadCamera()
+    {
+        dead = true;
+        lookDeadParticle = true;
+        yield return new WaitForSeconds(1f);
+        lookDeadParticle = false;
+    }
 }
+

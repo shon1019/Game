@@ -1,10 +1,60 @@
-Base path: C:/Program Files/Unity/Editor/Data
+Base path: D:/unity/Editor/Data
 Cmd: initializeCompiler
-Cmd: compileComputeKernel
-  api=4 insize=1435 outsize=585 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=3273 outsize=2253 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=1526 outsize=1533 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=2343 outsize=1341 ok=1
+Cmd: disassembleShader
+  api=4 insize=1218 outsize=2446 ok=1
+Cmd: disassembleShader
+  api=4 insize=2614 outsize=4452 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=17531 outsize=1486 kw=UNITY_PASS_FORWARDBASE DIRECTIONAL FOG_EXP VERTEXLIGHT_ON pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: disassembleShader
+  api=4 insize=1486 outsize=2849 ok=1
+Cmd: disassembleShader
+  api=4 insize=1214 outsize=2361 ok=1
+Cmd: disassembleShader
+  api=4 insize=3358 outsize=5418 ok=1
+Cmd: disassembleShader
+  api=4 insize=1218 outsize=2446 ok=1
+Cmd: disassembleShader
+  api=4 insize=1474 outsize=2764 ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4349 outsize=1558 kw=UNITY_PASS_FORWARDADD DIRECTIONAL_COOKIE FOG_EXP pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: disassembleShader
+  api=4 insize=1558 outsize=2925 ok=1
+Cmd: disassembleShader
+  api=4 insize=2022 outsize=3639 ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=12625 outsize=770 kw=UNITY_PASS_PREPASSFINAL LIGHTPROBE_SH FOG_EXP UNITY_HDR_ON pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: disassembleShader
+  api=4 insize=770 outsize=1827 ok=1
+Cmd: disassembleShader
+  api=4 insize=1418 outsize=2724 ok=1
+Cmd: disassembleShader
+  api=4 insize=1410 outsize=2696 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4286 outsize=1378 kw=UNITY_PASS_FORWARDADD POINT_COOKIE pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: disassembleShader
+  api=4 insize=1378 outsize=2648 ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4286 outsize=1678 kw=UNITY_PASS_FORWARDADD POINT_COOKIE pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: disassembleShader
+  api=4 insize=1678 outsize=3015 ok=1
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
