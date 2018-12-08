@@ -88,6 +88,7 @@
     <Compile Include="Assets\Script\tmpCameraMove.cs" />
     <Compile Include="Assets\Scripts\Barrel.cs" />
     <Compile Include="Assets\Scripts\Bomb.cs" />
+    <Compile Include="Assets\Scripts\Crown.cs" />
     <Compile Include="Assets\Scripts\Fracture.cs" />
     <Compile Include="Assets\Scripts\PlayerPeople.cs" />
     <Compile Include="Assets\Scripts\PlayerSelect.cs" />

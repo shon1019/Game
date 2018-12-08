@@ -7,42 +7,86 @@ public class Scroeboard : MonoBehaviour {
 
     public Image[] _Player = new Image[4];  // 積分條
     public Text[] _Score = new Text[4];     // 分數面板
+    public GameObject[] _Crown = new GameObject[4];   // 皇冠
     public float Speed;                     // 積分條上升速度
     private float[] score = new float[4];   // 分數
     private float highScore = 0;            // 最高分
-
-    void Start () {
-		
-	}
+    private int lessPlayer = 4;             // 尚未跑完積分人數
+    private bool[] lessPlayerCheck = new bool[4];   // 尚未跑完積分之人
+    private bool work;                      // 是否開始動作
     /**
+     * 測試用
      * 設定分數
      */
     void Awake()
     {
+
+        lessPlayer = 0;
         for (int i = 0; i < 4; i++) {
+            lessPlayerCheck[i] = true;
             string Score = _Score[i].text;
             score[i] = float.Parse(Score);
             if (highScore < score[i])
                 highScore = score[i];
         }
-        NormalizeScore();
+        work = true;
     }
-    /**
-     * 簡易正規化
+    /*
+     * 提供呼叫並執行
      */
-    private void NormalizeScore() {
-        for (int i = 0; i < 4; i++) {
-            score[i] /= highScore;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+    public void ShowRecord(int[] s) {
+        lessPlayer = 0;
         for (int i = 0; i < 4; i++)
         {
-            if (_Player[i].fillAmount < score[i])
-                _Player[i].fillAmount += Speed;
+            lessPlayerCheck[i] = true;
+            score[i] = s[i];
+            if (highScore < score[i])
+                highScore = score[i];       // 最高分紀錄
+        }
+        work = true;
+    }
+
+    /*
+     * 尋找所有人避免漏掉共同第一
+     * 播放第一皇冠動畫
+     */
+    private void ShowCrown() {
+        for (int i = 0; i < 4; i++)
+        {
+            if (score[i] == highScore)
+            { 
+                _Crown[i].SetActive(true);
+                _Crown[i].GetComponent<Animator>().Play("Crown");
+            }
+        }
+        work = false;
+    }
+
+    void Update()
+    {
+        if (work)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (_Player[i].fillAmount < score[i] / highScore && lessPlayerCheck[i])
+                {
+                    _Player[i].fillAmount += Speed; // 積分條累加
+                    int tmpScore = (int)(highScore * _Player[i].fillAmount);    // 暫時當下的面板積分數字
+                    if (tmpScore < score[i])
+                        _Score[i].text = tmpScore.ToString();                   // 暫時的
+                    else
+                    {
+                        _Score[i].text = score[i].ToString();                   // 最終結果
+                        lessPlayer--;                                           // 結束一人積分條
+                        lessPlayerCheck[i] = false;                             // 結束此人積分
+                        if (lessPlayer == 0)
+                        {                                   // 通通結束
+                            lessPlayer--;                                       // 防呆
+                            ShowCrown();                                        // 播放第一動畫
+                        }
+                    }
+                }
+            }
         }
     }
 }
