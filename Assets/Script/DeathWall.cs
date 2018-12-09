@@ -23,7 +23,7 @@ public class DeathWall : MonoBehaviour {
 
                 int totalNumber = tmpPlayerController.Points.Count;
                 int loseNumber = totalNumber / 4;
-                Debug.Log("Tran Crown" + totalNumber + "+" + loseNumber);
+                //Debug.Log("Tran Crown" + totalNumber + "+" + loseNumber);
                 GameManager.One.Player[tmpPlayerController.LastCollisionPlayer].GetComponent<PlayerController>().AddPoint(3);
                 for (int i= totalNumber - 1;i>= totalNumber - loseNumber;i--)
                 {

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject Barrel;
     public ParticleSystem[] Reviveparticle;
     public GameObject ChampionUI;
+    public GameObject ScoreBoard;
     public int Champion
     {
         get { return _champion; }
@@ -107,7 +108,16 @@ public class GameManager : MonoBehaviour
         }
         else if (_currentTime == 0) //  結算面板
         {
+            //  製作傳遞積分資料
+            int[] input = new int[4];
+            for (int i = 0; i < 4; i++)
+                input[i] = _playerControllers[i].Points.Count;
+            //  開啟結算面板
+            ScoreBoard.SetActive(true);
+            ScoreBoard.GetComponent<Scroeboard>().ShowRecord(input);//  輸入資料
+            _currentTime--;                                         //  防呆機制(因為避免重複輸入0)
 
+            /// 停止其他動作等待UI(待辦)
         }
 
         //生成寶箱
