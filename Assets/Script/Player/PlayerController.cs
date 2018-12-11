@@ -9,9 +9,8 @@ public class PlayerController : MonoBehaviour
     //Player Info
     public int PlayerId; // 0 1 2 3
 
-    //Kill Info :　LastCollisionPlayer若為自身　或者　LastCollisionTime = -1  算是自殺
+    //Kill Info :　LastCollisionPlayer若為自身　算是自殺
     public int LastCollisionPlayer;
-    public float LastCollisionTime = 10f;
 
     public Transform Camera;
     public float ForwardSpeed = 1;//向前移動速度
@@ -148,11 +147,11 @@ public class PlayerController : MonoBehaviour
             Vector3 direction = (collision.transform.position - transform.position).normalized;
             float rate = collision.rigidbody.velocity.magnitude / (rby.velocity.magnitude + collision.rigidbody.velocity.magnitude);
             rby.AddForce(-direction * rate * 10, ForceMode.Force);
+
             //更新碰撞紀錄
             if (collision.gameObject.GetComponent<PlayerController>().PlayerId != this.LastCollisionPlayer)
             {
                 this.LastCollisionPlayer = collision.gameObject.GetComponent<PlayerController>().PlayerId;
-                StartCoroutine(LastCollisonTimeDiscount());
             }
         }
        
@@ -201,10 +200,5 @@ public class PlayerController : MonoBehaviour
         _collision = false;
     }
 
-    IEnumerator LastCollisonTimeDiscount()
-    {
-        yield return new WaitForSeconds(2f);
-        this.LastCollisionPlayer = -1;
-    }
 
 }
