@@ -14,13 +14,14 @@ public class DeathWall : MonoBehaviour {
             ParticleSystem tmp = GameObject.Instantiate(DeadParticle, other.gameObject.transform.position,Quaternion.identity);//particle
             tmp.Play();
 
-            PlayerController tmpPlayerController = other.GetComponent<PlayerController>();//玩冠轉移
-            if(tmpPlayerController.LastCollisionPlayer!=-1)
+            PlayerController tmpPlayerController = other.GetComponent<PlayerController>();//王冠轉移
+            if(tmpPlayerController.LastCollisionPlayer != tmpPlayerController.PlayerId)
             {
                 //玩家死掉後會再生成一個寶箱
                 Vector3 treasurePos = other.gameObject.transform.position*0.7f;
                 GameManager.One.InstanceTreasure(treasurePos);
 
+                //給予擊殺者皇冠
                 int totalNumber = tmpPlayerController.Points.Count;
                 int loseNumber = totalNumber / 4;
                 //Debug.Log("Tran Crown" + totalNumber + "+" + loseNumber);
@@ -29,8 +30,10 @@ public class DeathWall : MonoBehaviour {
                 {
                     StartCoroutine(tmpPlayerController.Points[i].ChangeTarget(GameManager.One.Player[tmpPlayerController.LastCollisionPlayer]));
                 }
+                //初始化回自身
+                tmpPlayerController.LastCollisionPlayer = tmpPlayerController.PlayerId;
             }
-
+            
             other.gameObject.SetActive(false);
             gm.Revived(other.GetComponent<PlayerController>().PlayerId);//復活
             Destroy(tmp.gameObject,1);
