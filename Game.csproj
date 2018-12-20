@@ -253,21 +253,6 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
-    <Reference Include="ProBuilderCore-Unity5">
-      <HintPath>Assets/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll</HintPath>
-    </Reference>
-    <Reference Include="ProBuilderMeshOps-Unity5">
-      <HintPath>Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
-    </Reference>
-    <Reference Include="KdTreeLib">
-      <HintPath>Assets/ProCore/ProBuilder/Classes/ClassesLib/KdTreeLib.dll</HintPath>
-    </Reference>
-    <Reference Include="pb_Stl">
-      <HintPath>Assets/ProCore/ProBuilder/Classes/ClassesLib/pb_Stl.dll</HintPath>
-    </Reference>
-    <Reference Include="Poly2Tri">
-      <HintPath>Assets/ProCore/ProBuilder/Classes/ClassesLib/Poly2Tri.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/shion/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
@@ -321,100 +306,40 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\_MK\MKGlowFree\MKGlowFree.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Misc\HueCube.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Procedural Mesh\ExtrudeRandomEdges.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Runtime Editing\RuntimeEdit.cs" />
-    <Compile Include="Assets\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
-    <Compile Include="Assets\Script\ActivateChest.cs" />
-    <Compile Include="Assets\Script\BounceTrap.cs" />
-    <Compile Include="Assets\Script\CFX_AutoDestructShuriken.cs" />
-    <Compile Include="Assets\Script\DeathWall.cs" />
-    <Compile Include="Assets\Script\Effect\AfterEffects.cs" />
-    <Compile Include="Assets\Script\Effect\AfterImageEffects.cs" />
-    <Compile Include="Assets\Script\Effect\LightPos.cs" />
-    <Compile Include="Assets\Script\GameManager.cs" />
-    <Compile Include="Assets\Script\Player\CameraMove.cs" />
-    <Compile Include="Assets\Script\Player\PlayerController.cs" />
-    <Compile Include="Assets\Script\Player\Point.cs" />
-    <Compile Include="Assets\Script\Player\Power.cs" />
-    <Compile Include="Assets\Script\Player\tmpMove.cs" />
-    <Compile Include="Assets\Script\Player\UIPos.cs" />
-    <Compile Include="Assets\Script\Scroeboard.cs" />
-    <Compile Include="Assets\Script\Sound\MusicManager.cs" />
-    <Compile Include="Assets\Script\Sound\SoundEffectManager.cs" />
-    <Compile Include="Assets\Script\tmpCameraMove.cs" />
+    <Compile Include="Assets\Prefabs\TreasureChestMaker\Example\Scripts\CameraControl.cs" />
+    <Compile Include="Assets\Prefabs\TreasureChestMaker\TCM\Scripts\TCMPrefabs.cs" />
+    <Compile Include="Assets\Scripts\ActivateChest.cs" />
     <Compile Include="Assets\Scripts\Barrel.cs" />
     <Compile Include="Assets\Scripts\Bomb.cs" />
+    <Compile Include="Assets\Scripts\BounceTrap.cs" />
+    <Compile Include="Assets\Scripts\CFX_AutoDestructShuriken.cs" />
+    <Compile Include="Assets\Scripts\Crown.cs" />
+    <Compile Include="Assets\Scripts\DeathWall.cs" />
+    <Compile Include="Assets\Scripts\Effect\AfterEffects.cs" />
+    <Compile Include="Assets\Scripts\Effect\AfterImageEffects.cs" />
+    <Compile Include="Assets\Scripts\Effect\LightPos.cs" />
     <Compile Include="Assets\Scripts\Fracture.cs" />
-    <Compile Include="Assets\Scripts\PlayerPeople.cs" />
-    <Compile Include="Assets\Scripts\PlayerSelect.cs" />
-    <Compile Include="Assets\TreasureChestMaker\Example\Scripts\CameraControl.cs" />
-    <Compile Include="Assets\TreasureChestMaker\TCM\Scripts\TCMPrefabs.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\HallCtrl.cs" />
+    <Compile Include="Assets\Scripts\Player\CameraMove.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Player\Point.cs" />
+    <Compile Include="Assets\Scripts\Player\Power.cs" />
+    <Compile Include="Assets\Scripts\Player\tmpMove.cs" />
+    <Compile Include="Assets\Scripts\Player\UIPos.cs" />
+    <Compile Include="Assets\Scripts\Scroeboard.cs" />
+    <Compile Include="Assets\Scripts\Sound\MusicManager.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundEffectManager.cs" />
+    <Compile Include="Assets\Scripts\tmpCameraMove.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Prefab\FireWall\FireWall.shader" />
-    <None Include="Assets\Prefab\FireWall\FireWall_Line.shader" />
-    <None Include="Assets\Prefab\FreeDungeon\freeDungeon_ReadMe.txt" />
+    <None Include="Assets\Prefabs\Prefab\FireWall\FireWall.shader" />
+    <None Include="Assets\Prefabs\Prefab\FireWall\FireWall_Line.shader" />
+    <None Include="Assets\Prefabs\Prefab\FreeDungeon\freeDungeon_ReadMe.txt" />
+    <None Include="Assets\Prefabs\Prefab\MK_Normal-Diffuse.shader" />
     <None Include="Assets\Prefabs\SceneObject\Material\Shader\UnlitVertexColour_Alpha.shader" />
-    <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
-    <None Include="Assets\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
-    <None Include="Assets\ProCore\ProBuilder\About\ThirdPartyLicenses.txt" />
-    <None Include="Assets\ProCore\ProBuilder\About\changelog.txt" />
-    <None Include="Assets\ProCore\ProBuilder\About\pc_AboutEntry_ProBuilder.txt" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\DiffuseTextureBlend.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\DiffuseVertexColor.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_FaceHighlight.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_FacePicker.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_HideVertices.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_NormalPreview.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_ReferenceUnlit.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_ScrollHighlight.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_SelectionPicker.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_SmoothingPreview.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_StandardVertexColor.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_TransparentOverlay.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_UnlitSolidColor.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_UnlitVertexColor.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_VertexPicker.shader" />
-    <None Include="Assets\ProCore\ProBuilder\Shader\pb_VertexShader.shader" />
-    <None Include="Assets\ProCore\ProBuilder\readme.txt" />
+    <None Include="Assets\Prefabs\TreasureChestMaker\TCM\Documentation\ReadMe.txt" />
     <None Include="Assets\Shader\DethWall.shader" />
-    <None Include="Assets\TreasureChestMaker\TCM\Documentation\ReadMe.txt" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Render\MKGlowBlur.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Render\MKGlowBlurInc.cginc" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Render\MKGlowComposite.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Render\MKGlowCompositeInc.cginc" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Render\MKGlowSelectiveRender.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Cutout\MK_Cutout-Diffuse.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Cutout\MK_Cutout-DiffuseBumpSpec.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Cutout\MK_Cutout-DiffuseBumped.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Cutout\MK_Cutout-Glossy.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Illumin\MK_Illumin-Diffuse.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Illumin\MK_Illumin-DiffuseBumpSpec.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Illumin\MK_Illumin-DiffuseBumped.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Illumin\MK_Illumin-Glossy.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Normal\MK_Normal-Diffuse.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Normal\MK_Normal-DiffuseBumpSpec.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Normal\MK_Normal-DiffuseBumped.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Normal\MK_Normal-Glossy.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Other\MK_Illumin-Diffuse.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Other\MK_Mobile-Diffuse.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Other\MK_Unlit-Normal.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Particle\MK_Particle Add.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Particle\MK_Particle AddMultiply.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Particle\MK_Particle Alpha Blend.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Particle\MK_Particle Multiply.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Sprites\MK_Sprite-Default.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Sprites\MK_Sprite-Diffuse.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Sprites\MK_UnitySprites.cginc" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Transparent\MK_Transparent-Diffuse.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Transparent\MK_Transparent-DiffuseBumpSpec.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Transparent\MK_Transparent-DiffuseBumped.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\Transparent\MK_Transparent-Glossy.shader" />
-    <None Include="Assets\_MK\MKGlowFree\Shader\Variants_SelectiveMode\UI\MK_UI_Default.shader" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Light.uss" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Templates\Alert.uxml" />

@@ -8,6 +8,7 @@ public class CameraMove : MonoBehaviour
     public float High = 1;//相機高度
     public float XSpeed = 1;//調整視角左右速度
     public float Distance = 1;//背後相機多遠
+    public string[] Control;
 
     private float _x;
     private Quaternion rotationEugler;
@@ -32,9 +33,9 @@ public class CameraMove : MonoBehaviour
         {
 
 
-            if (Input.GetKey(KeyCode.J))
+            if (Input.GetButton(Control[0]))
                 _x -= XSpeed * Time.deltaTime;
-            if (Input.GetKey(KeyCode.K))
+            if (Input.GetButton(Control[1]))
                 _x += XSpeed * Time.deltaTime;
 
             if (_x > 360)

@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
             if (_playerControllers[i].Points.Count > championPoint)
             {
                 _champion = i;
+                championPoint = _playerControllers[i].Points.Count;
             }     
         }
 
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
         {
             rand_pos = RandomCenter(20);
             pos = _deathWall.transform.position;
+           
         }
 
         if (_currentTime <= 180 && _currentTime >= 150)     //  一階段縮圈 scale(10324,10324) -> scale(8000,8000)  
@@ -90,18 +92,21 @@ public class GameManager : MonoBehaviour
             float delta = (_currentTime - 150) / 30f;
             _deathWall.transform.localScale = Vector3.Lerp(new Vector3(8000, 4000, 8000), new Vector3(10324, 4000, 10324), delta);
             _deathWall.transform.position = Vector3.Lerp(new Vector3(rand_pos.x, 0, rand_pos.y), pos, delta);
+            BackGroundMusic.pitch = 1.1f;
         }
         else if (_currentTime <= 120 && _currentTime >= 90) //  二階段縮圈 scale(8000,8000) -> scale(6000,6000)
         {
             float delta = (_currentTime - 90) / 30f;
             _deathWall.transform.localScale = Vector3.Lerp(new Vector3(6000, 4000, 6000), new Vector3(8000, 4000, 8000), delta);
             _deathWall.transform.position = Vector3.Lerp(new Vector3(rand_pos.x, 0, rand_pos.y), pos, delta);
+            BackGroundMusic.pitch = 1.25f;
         }
         else if (_currentTime <= 60 && _currentTime >= 30)  //  三階段縮圈 scale(6000,6000) -> scale(4000,4000)
         {
             float delta = (_currentTime - 30) / 30f;
             _deathWall.transform.localScale = Vector3.Lerp(new Vector3(4000, 4000, 4000), new Vector3(6000, 4000, 6000), delta);
             _deathWall.transform.position = Vector3.Lerp(new Vector3(rand_pos.x, 0, rand_pos.y), pos, delta);
+            BackGroundMusic.pitch = 1.5f;
         }
         else if (_currentTime == 0) //  結算面板
         {
@@ -194,6 +199,7 @@ public class GameManager : MonoBehaviour
         tmpPoint += _deathWall.transform.position;
         tmpPoint.y = 3;
         Player[playerID].transform.position = tmpPoint; //設定重生點
+        Player[playerID].GetComponent<PlayerController>().Init();
         Player[playerID].GetComponent<Rigidbody>().velocity = Vector3.zero;
         Player[playerID].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 

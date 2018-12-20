@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     public float SprintSpeed = 20;//衝刺速度
     public float SprintCountDown = 10;//衝刺CD時間
     public ParticleSystem ParticleSprint;
-    public ParticleSystem ParticlePower;
     public bool DontCollision
     {
         get { return _dontCollision; }
@@ -28,13 +27,15 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public List<Point> Points;
 
+    public string[] control;
+
     private bool _dontCollision = false;//會不會被撞飛 true : 不會被撞飛
     private bool _cansprint = true;   //是否可以衝刺(後退時不可衝刺)
-    private bool _sprinting = false;//是否衝刺CD
     private bool _sprintspeedDown = true;//是否正在限速
     private bool _collisionspeedDown = true;//是否正在碰撞限速
     private bool _collision = false;//是否被撞飛(被撞到不能控制)
     private bool _flying = false;//是否離地(離地不能控制)
+    private float _sprintTime = 9;
 
 
     private RaycastHit hit;
@@ -43,14 +44,21 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rby = GetComponent<Rigidbody>();
-        StartCoroutine(SprintingCountDown(1));
+        _sprintTime = 9;
         LastCollisionPlayer = PlayerId;//初始化為自己
+    }
+
+    public void Init ()
+    {
+      _collision = false;//是否被撞飛(被撞到不能控制)
+        _sprintTime = 9;    //  重設衝刺CD
+        _collisionspeedDown = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        _sprintTime += Time.deltaTime;
 
         RaycastHit hit;//判斷離地
         if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 1f))
@@ -71,48 +79,30 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        Vector3 dir = Camera.position - this.transform.position;
+        Vector3 dir =this.transform.position- Camera.position;
         dir.y = 0;
         dir = dir.normalized;
 
         //集氣
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton(control[0]))
         {
-            if (_sprinting && _cansprint)//移動中可衝刺
+            if (_sprintTime >= 10 && _cansprint)//移動中可衝刺
             {
-                rby.AddForce(-dir * Time.deltaTime * SprintSpeed);
-                StartCoroutine(SprintingCountDown(SprintCountDown));
+                rby.AddForce(dir * Time.deltaTime * SprintSpeed);
+                _sprintTime = 0;
                 StartCoroutine(SprintSpeedDownCountDown(1));
             }
         }
-        else
-        {
-            ParticlePower.Stop();
-        }
+        Debug.Log("_collision "+_collision);
+        Debug.Log("_flying " + _flying);
         //操作
         if (!_collision & !_flying)
         {
+            
             _cansprint = true;
-
-            if (Input.GetKey(KeyCode.W))
-            {
-                rby.AddForce(-dir * Time.deltaTime * ForwardSpeed);
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                _cansprint = false;
-                rby.AddForce(dir * Time.deltaTime * ForwardSpeed);
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                dir = Vector3.Cross(dir, new Vector3(0, 1, 0));
-                rby.AddForce(-dir * Time.deltaTime * ForwardSpeed);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                dir = Vector3.Cross(dir, new Vector3(0, 1, 0));
-                rby.AddForce(dir * Time.deltaTime * ForwardSpeed);
-            }
+            rby.AddForce(Input.GetAxis(control[2]) * dir * Time.deltaTime * ForwardSpeed);
+            dir = Vector3.Cross(dir, new Vector3(0, 1, 0));
+            rby.AddForce(Input.GetAxis(control[1]) * -dir * Time.deltaTime * ForwardSpeed);
 
         }
         if (rby.velocity.magnitude >= MaxSpeed)
@@ -154,7 +144,7 @@ public class PlayerController : MonoBehaviour
                 this.LastCollisionPlayer = collision.gameObject.GetComponent<PlayerController>().PlayerId;
             }
         }
-       
+
     }
 
     //增加幾個point(王冠)
@@ -185,13 +175,6 @@ public class PlayerController : MonoBehaviour
         _collisionspeedDown = true;
     }
 
-    IEnumerator SprintingCountDown(float _time)//衝刺CD
-    {
-        _sprinting = false;
-        yield return new WaitForSeconds(_time);
-        _sprinting = true;
-
-    }
 
     public IEnumerator CollisionCountDown(float _time)//collisoin
     {
