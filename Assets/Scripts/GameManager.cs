@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
     private PlayerController[] _playerControllers;
     private Vector2 rand_pos;
     private Vector3 pos;
+    private SpriteRenderer championColor;
+    private Color[] playerColor = new Color[4];
     private void Awake()
     {
         One = this;
@@ -46,6 +49,12 @@ public class GameManager : MonoBehaviour
         _treasureAppera = false;
         StartCoroutine(TreasureAppear());
         _playerControllers = new PlayerController[Player.Length];
+        playerColor[0] = new Color(238,0,185);
+        playerColor[1] = new Color(0,162,231);
+        playerColor[2] = new Color(255,0,0);
+        playerColor[3] = new Color(255,165,0);
+        championColor = ChampionUI.GetComponent<SpriteRenderer>();
+        championColor.color = playerColor[0];
         for (int i = 0; i < Player.Length; i++)
             _playerControllers[i] = Player[i].GetComponent<PlayerController>();
     }
@@ -62,6 +71,7 @@ public class GameManager : MonoBehaviour
             {
                 _champion = i;
                 championPoint = _playerControllers[i].Points.Count;
+                championColor.color = playerColor[i];
             }     
         }
 
@@ -197,7 +207,7 @@ public class GameManager : MonoBehaviour
         tmpPoint.z = Mathf.Sin(angle);
         tmpPoint *= dis;
         tmpPoint += _deathWall.transform.position;
-        tmpPoint.y = 3;
+        tmpPoint.y = 5;
         Player[playerID].transform.position = tmpPoint; //設定重生點
         Player[playerID].GetComponent<PlayerController>().Init();
         Player[playerID].GetComponent<Rigidbody>().velocity = Vector3.zero;
