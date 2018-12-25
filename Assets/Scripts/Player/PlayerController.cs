@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public RecordVelocity rv;
 
     public Transform Camera;
+    public float BaseForce = 0;
+    public float ForceRate = 7;
     public float ForwardSpeed = 1;//向前移動速度
     public float MaxSpeed = 1;//最高速度
     public float SprintSpeed = 20;//衝刺速度
@@ -31,6 +33,9 @@ public class PlayerController : MonoBehaviour
     public List<Point> Points;
 
     public string[] control;
+
+    public GameObject[] PlayerUI;
+
 
     private bool _dontCollision = false;//會不會被撞飛 true : 不會被撞飛
     private bool _cansprint = true;   //是否可以衝刺(後退時不可衝刺)
@@ -51,11 +56,12 @@ public class PlayerController : MonoBehaviour
         LastCollisionPlayer = PlayerId;//初始化為自己
     }
 
-    public void Init ()
+    public void Init()
     {
         _collision = false;//是否被撞飛(被撞到不能控制)
         _sprintTime = 9;    //  重設衝刺CD
         _collisionspeedDown = true;
+        _sprintspeedDown = true;
     }
 
     // Update is called once per frame
@@ -82,11 +88,11 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        Vector3 dir =this.transform.position- Camera.position;
+        Vector3 dir = this.transform.position - Camera.position;
         dir.y = 0;
         dir = dir.normalized;
 
-        //集氣
+
         if (Input.GetButton(control[0]))
         {
             if (_sprintTime >= 10 && _cansprint)//移動中可衝刺
@@ -100,7 +106,7 @@ public class PlayerController : MonoBehaviour
         //操作
         if (!_collision & !_flying)
         {
-            
+
             _cansprint = true;
             rby.AddForce(Input.GetAxis(control[2]) * dir * Time.deltaTime * ForwardSpeed);
             dir = Vector3.Cross(dir, new Vector3(0, 1, 0));
@@ -120,8 +126,6 @@ public class PlayerController : MonoBehaviour
                 Vector3 tmpdir = rby.velocity.normalized;
                 ParticleSprint.transform.position = transform.position + tmpdir.normalized * 0.5f;
                 ParticleSprint.transform.forward = -tmpdir;
-                if (rby.velocity.magnitude >= MaxSpeed * 2.5f)
-                    rby.velocity = rby.velocity.normalized * MaxSpeed * 2.5f;
             }
             else
             {
@@ -138,8 +142,9 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(CollisionCountDown(1));//不能控制
             Vector3 direction = (collision.transform.position - transform.position).normalized;
 
-            float rate = collision.gameObject.GetComponent<PlayerController>().rv.GetPlayerVelocity() / (rv.GetPlayerVelocity() + collision.gameObject.GetComponent<PlayerController>().rv.GetPlayerVelocity());
-            rby.AddForce(-direction * rate * 10, ForceMode.Force);
+            float rate = collision.gameObject.GetComponent<PlayerController>().rv.GetPlayerVelocity();
+            //float rate2 = (rv.GetPlayerVelocity() + collision.gameObject.GetComponent<PlayerController>().rv.GetPlayerVelocity());
+            rby.AddForce(-direction * (BaseForce + rate / ForceRate), ForceMode.Force);
 
 
 

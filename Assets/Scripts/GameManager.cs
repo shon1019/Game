@@ -49,10 +49,10 @@ public class GameManager : MonoBehaviour
         _treasureAppera = false;
         StartCoroutine(TreasureAppear());
         _playerControllers = new PlayerController[Player.Length];
-        playerColor[0] = new Color(238,0,185);
-        playerColor[1] = new Color(0,162,231);
-        playerColor[2] = new Color(255,0,0);
-        playerColor[3] = new Color(255,165,0);
+        playerColor[0] = new Color(238, 0, 185);
+        playerColor[1] = new Color(0, 162, 231);
+        playerColor[2] = new Color(255, 0, 0);
+        playerColor[3] = new Color(255, 165, 0);
         championColor = ChampionUI.GetComponent<SpriteRenderer>();
         championColor.color = playerColor[0];
         for (int i = 0; i < Player.Length; i++)
@@ -63,28 +63,28 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //排名
-        
+
         int championPoint = 0;
-        for (int i=0;i< _playerControllers.Length;i++)
+        for (int i = 0; i < _playerControllers.Length; i++)
         {
             if (_playerControllers[i].Points.Count > championPoint)
             {
                 _champion = i;
                 championPoint = _playerControllers[i].Points.Count;
                 championColor.color = playerColor[i];
-            }     
+            }
         }
 
         ChampionUI.transform.position = Player[_champion].transform.position + new Vector3(0, 10, 0);
- 
-        for(int i=0;i< PlayerUI.Length;i++)
+
+        for (int i = 0; i < PlayerUI.Length; i++)
         {
 
             if (i == _champion)
             {
                 PlayerUI[i].SetActive(false);
             }
-                
+
             else
                 PlayerUI[i].SetActive(true);
         }
@@ -94,7 +94,22 @@ public class GameManager : MonoBehaviour
         {
             rand_pos = RandomCenter(20);
             pos = _deathWall.transform.position;
-           
+
+            /// 更改碰撞力道比例
+            if (_currentTime == 120)
+            {
+                for (int i = 0; i < 4; i++)
+                    _playerControllers[i].ForceRate = 10;             
+            }
+
+            /// 更改基本碰撞力道
+            else if (_currentTime == 60)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    _playerControllers[i].BaseForce = 0;
+                }
+            }
         }
 
         if (_currentTime <= 180 && _currentTime >= 150)     //  一階段縮圈 scale(10324,10324) -> scale(8000,8000)  
@@ -167,20 +182,20 @@ public class GameManager : MonoBehaviour
     public void InstanceTreasure(Vector3 pos)
     {
         int ran = Random.Range(0, 4);
-        if(ran<3)
+        if (ran < 3)
         {
             GameObject.Instantiate(Treasure, pos, new Quaternion(0, 0, 0, 0));
         }
         else
         {
-            GameObject.Instantiate(Barrel, pos, new Quaternion(0, 0, 0, 0));   
+            GameObject.Instantiate(Barrel, pos, new Quaternion(0, 0, 0, 0));
         }
         _treasureAppera = false;
     }
 
     IEnumerator Discount()
     {
-        while (_currentTime>0)
+        while (_currentTime > 0)
         {
             yield return new WaitForSeconds(1f);
             _currentTime -= 1;
@@ -195,7 +210,7 @@ public class GameManager : MonoBehaviour
     }
 
     //重生
-    IEnumerator Revive(int t,int playerID)
+    IEnumerator Revive(int t, int playerID)
     {
 
         //************************************tmp
@@ -207,20 +222,20 @@ public class GameManager : MonoBehaviour
         tmpPoint.z = Mathf.Sin(angle);
         tmpPoint *= dis;
         tmpPoint += _deathWall.transform.position;
-        tmpPoint.y = 0;
+        tmpPoint.y = 5;
         Player[playerID].transform.position = tmpPoint; //設定重生點
         Player[playerID].GetComponent<PlayerController>().Init();
         Player[playerID].GetComponent<Rigidbody>().velocity = Vector3.zero;
         Player[playerID].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
         Vector3 RevivePos = tmpPoint;
-        ParticleSystem tmp = GameObject.Instantiate(Reviveparticle[playerID], RevivePos,new Quaternion(-90,0,0,90));
+        ParticleSystem tmp = GameObject.Instantiate(Reviveparticle[playerID], RevivePos, new Quaternion(-90, 0, 0, 90));
         tmp.Play();
 
         yield return new WaitForSeconds(t);
         Destroy(tmp.gameObject);
         Player[playerID].SetActive(true);
-        
+
     }
 
     private Vector2 RandomCenter(int length)
