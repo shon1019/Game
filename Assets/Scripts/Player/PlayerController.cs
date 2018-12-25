@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     //Kill Info :　LastCollisionPlayer若為自身　算是自殺
     public int LastCollisionPlayer;
 
+    //撞擊時取得自身速度
+    public RecordVelocity rv;
+
     public Transform Camera;
     public float ForwardSpeed = 1;//向前移動速度
     public float MaxSpeed = 1;//最高速度
@@ -50,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     public void Init ()
     {
-      _collision = false;//是否被撞飛(被撞到不能控制)
+        _collision = false;//是否被撞飛(被撞到不能控制)
         _sprintTime = 9;    //  重設衝刺CD
         _collisionspeedDown = true;
     }
@@ -93,8 +96,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(SprintSpeedDownCountDown(1));
             }
         }
-        Debug.Log("_collision "+_collision);
-        Debug.Log("_flying " + _flying);
+
         //操作
         if (!_collision & !_flying)
         {
@@ -135,8 +137,11 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(CollisionSpeedDownCountDown(1f));//解除限速
             StartCoroutine(CollisionCountDown(1));//不能控制
             Vector3 direction = (collision.transform.position - transform.position).normalized;
-            float rate = collision.rigidbody.velocity.magnitude / (rby.velocity.magnitude + collision.rigidbody.velocity.magnitude);
+
+            float rate = collision.gameObject.GetComponent<PlayerController>().rv.GetPlayerVelocity() / (rv.GetPlayerVelocity() + collision.gameObject.GetComponent<PlayerController>().rv.GetPlayerVelocity());
             rby.AddForce(-direction * rate * 10, ForceMode.Force);
+
+
 
             //更新碰撞紀錄
             if (collision.gameObject.GetComponent<PlayerController>().PlayerId != this.LastCollisionPlayer)

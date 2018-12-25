@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
         tmpPoint.z = Mathf.Sin(angle);
         tmpPoint *= dis;
         tmpPoint += _deathWall.transform.position;
-        tmpPoint.y = 5;
+        tmpPoint.y = 0;
         Player[playerID].transform.position = tmpPoint; //設定重生點
         Player[playerID].GetComponent<PlayerController>().Init();
         Player[playerID].GetComponent<Rigidbody>().velocity = Vector3.zero;
