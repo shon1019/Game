@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Hall.unity
     guid: d7a750bdfcf50d140af716efda841bce
   - enabled: 1
-    path: Assets/low poly pack/scene/Demo1.unity
+    path: Assets/Scenes/Main.unity
     guid: c4fd6c739f0dfbb48ac72a7e5b8c84c5
   m_configObjects: {}
